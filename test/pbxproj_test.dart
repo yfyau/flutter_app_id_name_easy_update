@@ -3,18 +3,18 @@ import 'package:flutter_application_id/file_updater/rules/pbxproj.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  FileUpdater _fileUpdater;
+  FileUpdater? _fileUpdater;
 
   void givenFileContent(String fileContent) {
     _fileUpdater = FileUpdater.fromString(fileContent);
   }
 
   void whenUpdating(String key, String value) {
-    _fileUpdater.update(Pbxproj(key, value));
+    _fileUpdater?.update(Pbxproj(key, value));
   }
 
   void thenExpectsFileContent(String fileContent) {
-    expect(_fileUpdater.toString(), fileContent);
+    expect(_fileUpdater?.toString(), fileContent);
   }
 
   test('Should update symbol value if present', () {
