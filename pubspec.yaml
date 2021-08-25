@@ -1,6 +1,6 @@
 name: flutter_application_id
 description: A command-line tool to update your Flutter app's Name and ID
-version: 2.0.0
+version: 2.0.0-dev
 maintainer: Charly Caulet
 homepage: https://gitlab.com/uprefer/flutter/flutter_application_id
 repository: https://gitlab.com/uprefer/flutter/flutter_application_id
