@@ -3,18 +3,18 @@ import 'package:flutter_application_id/file_updater/rules/plist.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  FileUpdater _fileUpdater;
+  FileUpdater? _fileUpdater;
 
   void givenFileContent(String fileContent) {
     _fileUpdater = FileUpdater.fromString(fileContent);
   }
 
   void whenUpdating(String key, String value) {
-    _fileUpdater.update(Plist(key, value));
+    _fileUpdater?.update(Plist(key, value));
   }
 
   void thenExpectsFileContent(String fileContent) {
-    expect(_fileUpdater.toString(), fileContent);
+    expect(_fileUpdater?.toString(), fileContent);
   }
 
   test('Should update value if present', () {

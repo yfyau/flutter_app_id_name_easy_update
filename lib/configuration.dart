@@ -5,9 +5,12 @@ import 'package:flutter_application_id/custom_exceptions.dart';
 import 'package:yaml/yaml.dart';
 
 class PlatformConfiguration extends Equatable {
-  const PlatformConfiguration({this.id, this.name});
+  const PlatformConfiguration({
+    this.id,
+    this.name,
+  });
 
-  static PlatformConfiguration fromYamlMap(dynamic map) {
+  static PlatformConfiguration? fromYamlMap(dynamic map) {
     if (map == null) {
       return null;
     }
@@ -20,27 +23,41 @@ class PlatformConfiguration extends Equatable {
   static const String _ID_KEY = 'id';
   static const String _NAME_KEY = 'name';
 
-  final String id;
-  final String name;
+  final String? id;
+  final String? name;
 
   @override
-  List<Object> get props => <Object>[id, name];
+  List<Object?> get props => [id, name];
 }
 
 class Configuration extends Equatable {
-  const Configuration({this.android, this.ios});
+  const Configuration({
+    this.android,
+    this.ios,
+  });
 
   static const String _FLUTTER_APPLICATION_ID_KEY = 'flutter_application_id';
   static const String _IOS_KEY = 'ios';
   static const String _ANDROID_KEY = 'android';
-  final PlatformConfiguration android;
-  final PlatformConfiguration ios;
+  final PlatformConfiguration? android;
+  final PlatformConfiguration? ios;
+
+  static YamlMap _loadYaml(String data) {
+    try {
+      final dynamic loadedObject = loadYaml(data);
+
+      if (loadedObject is! YamlMap) throw InvalidFormatException();
+
+      return loadedObject;
+    } catch (e) {
+      throw InvalidFormatException();
+    }
+  }
 
   static Configuration fromString(String data) {
-    final YamlMap yamlMap = loadYaml(data);
+    final yamlMap = _loadYaml(data);
 
-    if (yamlMap == null ||
-        !yamlMap.containsKey(_FLUTTER_APPLICATION_ID_KEY) ||
+    if (!yamlMap.containsKey(_FLUTTER_APPLICATION_ID_KEY) ||
         !(yamlMap[_FLUTTER_APPLICATION_ID_KEY] is YamlMap)) {
       throw NoConfigFoundException();
     }
@@ -56,5 +73,5 @@ class Configuration extends Equatable {
   }
 
   @override
-  List<Object> get props => <Object>[android, ios];
+  List<Object?> get props => [android, ios];
 }

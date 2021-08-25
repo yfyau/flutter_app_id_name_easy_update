@@ -29,3 +29,7 @@
 - Update dependencies
 - Add usage examples
 - Improve Readme
+
+## 2.0.0-dev
+
+- Nullsafety

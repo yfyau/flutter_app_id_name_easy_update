@@ -9,7 +9,7 @@ class FileUpdater {
 
   final List<String> _data;
 
-  static void updateFile(File file, UpdateRule updateRule) async {
+  static Future<void> updateFile(File file, UpdateRule updateRule) async {
     final FileUpdater fileUpdater = await FileUpdater.fromFile(file);
     fileUpdater.update(updateRule);
     fileUpdater.toFile(file);
@@ -23,7 +23,7 @@ class FileUpdater {
     return FileUpdater(await file.readAsLines());
   }
 
-  void toFile(File file) async {
+  Future<void> toFile(File file) async {
     await file.writeAsString(_data.join('\n'));
   }
 
